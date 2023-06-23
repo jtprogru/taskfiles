@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+---
+version: "3"
+
+output:
+  group:
+    error_only: true
+
+set:
+  - pipefail
+
+silent: false
+
+vars:
+  INPUT_FILE: index.md
+  OUTPUT_FILE: presentation
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task --list --color
+
+  prec:
+    desc: Run all preconditions
+    preconditions:
+      - test -f $(which marp)
+      - test -f {{.INDEX_FILE}}
+
+  build:pdf:
+    desc: Build PDF from markdown
+    deps:
+      - prec
+    cmds:
+      - marp {{.INPUT_FILE}} -o {{.OUTPUT_FILE}}.pdf --pdf
+
+  build:pptx:
+    desc: Build Microsoft PowerPoint from markdown
+    deps:
+      - prec
+    cmds:
+      - marp {{.INPUT_FILE}} -o {{.OUTPUT_FILE}}.pptx --pptx
+
+  clean:
+    desc: Clean all artifacts
+    cmds:
+      - rm -f {{.OUTPUT_FILE}}.*

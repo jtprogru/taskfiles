@@ -1,0 +1,14 @@
+*~
+.DS_Store
+venv/
+env/
+.idea/
+__pycache__/
+.env
+.vscode/
+FUCKUPS.md
+TODO.md
+*.sqlite
+*.sqlite3
+example.sls
+
