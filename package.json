@@ -1,0 +1,28 @@
+{
+  "name": "taskfiles",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:all": "npm run build:html && npm run build:pdf",
+    "build:html": "marp",
+    "build:pdf": "marp --pdf",
+    "build:pp": "marp --pptx",
+    "clean": "rm -fr dist/*.{html,pdf,pptx}",
+    "preview": "marp --preview",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:html": "marp --watch"
+  },
+  "author": "Michael Savin <jtprogru@gmail.com>",
+  "license": "None",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^1.7.0"
+  },
+  "marp": {
+    "allowLocalFiles": true,
+    "html": true,
+    "inputDir": "src",
+    "output": "dist",
+    "engine": "./engine.js"
+  }
+}

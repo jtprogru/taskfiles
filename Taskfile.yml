@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+---
+version: "3"
+
+output:
+  group:
+    error_only: true
+
+set:
+  - pipefail
+
+silent: false
+
+vars:
+  INPUT_FILE: src/index.md
+  OUTPUT_DIR: dist
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task --list --color
+
+  prec:
+    desc: Run all preconditions
+    deps:
+      - clean
+    preconditions:
+      - test -f $(which marp)
+      - test -f {{.INDEX_FILE}}
+      - test -f $(which npm)
+    cmds:
+      - npm i
+
+  build:pdf:
+    desc: Build PDF from markdown
+    deps:
+      - prec
+    cmds:
+      - npm run build:pdf
+
+  build:all:
+    desc: Build all
+    deps:
+      - prec
+    cmds:
+      - npm run build:all
+
+  build:pp:
+    desc: Build Microsoft PowerPoint from markdown
+    deps:
+      - prec
+    cmds:
+      - npm run build:pp
+
+  clean:
+    desc: Clean all artifacts
+    cmds:
+      - rm -rf {{.OUTPUT_DIR}}
+      - rm -rf node_modules/*
