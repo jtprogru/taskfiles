@@ -11,10 +11,6 @@ set:
 
 silent: false
 
-vars:
-  INPUT_FILE: src/index.md
-  OUTPUT_DIR: dist
-
 tasks:
   default:
     silent: true
@@ -26,35 +22,32 @@ tasks:
     deps:
       - clean
     preconditions:
-      - test -f $(which marp)
-      - test -f {{.INDEX_FILE}}
       - test -f $(which npm)
     cmds:
       - npm i
 
-  build:pdf:
+  export:
     desc: Build PDF from markdown
     deps:
       - prec
     cmds:
-      - npm run build:pdf
+      - npm run export
 
-  build:all:
-    desc: Build all
+  build:
+    desc: Build
     deps:
       - prec
     cmds:
-      - npm run build:all
+      - npm run build
 
-  build:pp:
-    desc: Build Microsoft PowerPoint from markdown
+  dev:
+    desc: Run development
     deps:
       - prec
     cmds:
-      - npm run build:pp
+      - npm run dev
 
   clean:
     desc: Clean all artifacts
     cmds:
-      - rm -rf {{.OUTPUT_DIR}}
       - rm -rf node_modules/*

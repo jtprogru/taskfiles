@@ -7,7 +7,7 @@
 Собрать готовый PDF:
 
 ```shell
-task build:pdf
+task export
 ```
 
 Собрать pptx для PowerPoint:

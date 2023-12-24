@@ -1,21 +1,26 @@
 ---
+theme: seriph
+background: /carbon.png
+class: text-center
+highlighter: shiki
+lineNumbers: true
+info: |
+  ## Альтернатива Makefile, которая читается легче
+
+drawings:
+  persist: false
+transition: slide-left
 title: Taskfile
-description: Альтернатива Makefile, которая читается легче
-author: Michael Savin
-keywords: Makefile,Taskfile
-url: https://t.me/jtprogru_channel
-image: https://jtprog.ru/twitter-card.svg
-paginate: true
-marp: true
+mdc: true
 ---
 
 # Taskfile
 
 ## Альтернатива Makefile, которая читается легче
 
-### Michael Savin | [@jtprogru_channel](https://t.me/jtprogru_channel)
+### Михаил Савин | [@jtprogru_channel](https://t.me/jtprogru_channel)
 
-### [Bear on Server](https://bearonserver.ru) | 2023
+### [Мишка на сервере](https://jtprog.ru) | 2023
 
 ---
 
@@ -36,6 +41,8 @@ make rundev
 ---
 
 ## Makefile – Example
+
+<Transform :scale="0.85">
 
 ```make
 SHELL := /bin/bash
@@ -68,6 +75,7 @@ run.bin: build.bin
 run.dc:
  $(SYS_DOCKER) compose up -d --build
 ```
+</Transform>
 
 ---
 
@@ -85,18 +93,26 @@ make run.bin
 ```
 
 ---
+layout: two-cols
+---
 
 ## Makefile – Help
 
 Первый запуск проекта обычно – ознакомление.
 
-*Вопрос*: Как понять, какие команды тебе доступны в Makefile?
+*Вопрос*: Какие команды тебе доступны в Makefile?
 
 *Ответ*: "Открой в редакторе и почитай! Тычо?"
+
+::right::
+
+![](/history.png)
 
 ---
 
 ## Makefile – Help
+
+<Transform :scale="0.63">
 
 ```make
 .PHONY: help
@@ -141,22 +157,32 @@ help:
  | more $(shell test $(shell uname) == Darwin && echo '--no-init --raw-control-chars')
 ```
 
+</Transform>
+
+
 ---
 
 ## Taskfile
 
 Документация доступна тут на официальном сайте утилиты [taskfile.dev](https://taskfile.dev).
 
-Установка максимально простая:
+Установка максимально простая.
+
+#### Для пользователей Homebrew
 
 ```shell
-# Для пользователей Homebrew
 brew install go-task/tap/go-task
+```
 
-# Ну или с помощью скриптов
+#### Ну или с помощью скриптов
+
+```bash
 sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+```
 
-# Ну в крайнем случае go install
+#### Ну в крайнем случае go install
+
+```bash
 go install github.com/go-task/task/v3/cmd/task@latest
 ```
 
@@ -203,7 +229,24 @@ tasks:
       - task --list --color
 ```
 
-ДА! Это все! И даже если это не добавить, тебе task подскажет сам!
+ДА! Это все! И даже если это не добавить, тебе task подскажет сам! Для ленивых:
+
+```bash {lines:false}
+~/work/github/jtf $ task
+task: Available tasks for this project:
+* apply:                         Apply terraform plan with confirmation
+* checkov:                       Run checkov for all files
+* decrypt:                       Decrypt all secrets
+* encrypt:                       Encrypt all secrets
+* fmt:                           Fix formatting all terraform files
+task: Task "default" does not exist
+```
+
+task сам подскажет тебе
+
+<!--
+Максимально простой пример того, как можно упростить себе жизнь даже не используя default-задачу.
+-->
 
 ---
 
@@ -215,17 +258,32 @@ tasks:
 - Удобно читать YAML;
 - Ревью YAML гораздо приятнее и удобнее, чем Makefile;
 
+<!--
+1. Действительно, самое сложное – приучиться писать task, а не make.
+2. В большинстве случаев мы работаем с YAML-кодом в виде HCL, K8s манифесты, Helm-чарты;
+3. Ревьюить YAML портянку гораздо приятнее.
+-->
+
 ---
 
 ## Taskfile – Demo
 
-На примере Terraform-проекта `production` можно посмотреть использование Taskfile.
+На примере рабочего Terraform-проекта можно посмотреть использование Taskfile.
 
+---
+layout: two-cols
 ---
 
 ## СПАСИБО
 
-- [https://taskfile.dev/usage/](https://taskfile.dev/usage/) – документация по Taskfile API;
+Мелкое и полезное
+
+- [taskfile](https://taskfile.dev) – документация по Taskfile API;
+- [justfile](https://just.systems/man/en/) – довольно мощная альтернатива;
 - [Gist Taskfile.yml](https://gist.github.com/jtprogru/59e4a634725f68bda83c29ce677b73e0) – мой пример Taskfile из реального проекта;
 - [Gist Makefile](https://gist.github.com/jtprogru/541f00f70ca0bd866e4f1164f6f77e5b) - мой пример Makefile из реального проекта;
-- [@jtprogru_channel](https://t.me/jtprogru_channel) – велкам в мою телегу;
+- [Мишка на сервере](https://t.me/jtprogru_channel) – велкам в мою телегу;
+
+::right::
+
+![](/qr-code.gif)
