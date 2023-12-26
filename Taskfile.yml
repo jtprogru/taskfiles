@@ -2,10 +2,6 @@
 ---
 version: "3"
 
-output:
-  group:
-    error_only: true
-
 set:
   - pipefail
 
@@ -15,7 +11,7 @@ tasks:
   default:
     silent: true
     cmds:
-      - task --list --color
+      - task --list-all --color
 
   prec:
     desc: Run all preconditions
@@ -50,4 +46,4 @@ tasks:
   clean:
     desc: Clean all artifacts
     cmds:
-      - rm -rf node_modules/*
+      - rm -rf node_modules/
