@@ -1,6 +1,6 @@
 # taskfiles
 
-Презентация "Makefile vs Taskfile".
+Презентация "Taskfile – Альтернатива Makefile, которая читается легче".
 
 ## Useful
 
@@ -10,12 +10,13 @@
 task export
 ```
 
-Собрать pptx для PowerPoint:
+Запустить development-сервер:
 
 ```shell
-task build:pptx
+task dev
 ```
 
 ## License
 
 Распространение только с письменного согласия автора и владельца – Savin Michael.
+
