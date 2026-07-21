@@ -11,5 +11,9 @@
     "@slidev/cli": "^52.18.0",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest"
+  },
+  "overrides": {
+    "picomatch@<2.3.2": "2.3.2",
+    "dompurify@<3.4.12": "3.4.12"
   }
 }
