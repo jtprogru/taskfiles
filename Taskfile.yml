@@ -14,13 +14,16 @@ tasks:
       - task --list-all --color
 
   prec:
-    desc: Run all preconditions
-    deps:
-      - clean
+    desc: Install dependencies (only if manifests changed)
     preconditions:
       - test -f $(which npm)
+    sources:
+      - package.json
+      - package-lock.json
+    generates:
+      - node_modules/.package-lock.json
     cmds:
-      - npm i
+      - npm install
 
   export:
     desc: Build PDF from markdown
@@ -30,7 +33,7 @@ tasks:
       - npm run export
 
   build:
-    desc: Build
+    desc: Build static site into dist/
     deps:
       - prec
     cmds:
@@ -46,4 +49,4 @@ tasks:
   clean:
     desc: Clean all artifacts
     cmds:
-      - rm -rf node_modules/
+      - rm -rf node_modules/ dist/
