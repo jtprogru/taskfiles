@@ -6,3 +6,8 @@ index.html
 .remote-assets
 components.d.ts
 .vite-inspect
+.task
+
+# ассеты темы, синхронизируются scripts/sync-theme-assets.mjs
+public/brand/
+assets/mascot-tinted.svg
